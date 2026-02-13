@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GST Calculator</title>
+</head>
+<body>
+    <h1>GST Calculator</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="price">Price :</label>
+        <input type="text" id="price" name="price" required><br><br>
+
+        <label for="gst">GST (R in %):</label>
+        <input type="text" id="gst" name="gst" required><br><br>
+
+        <button type="submit">Calculate</button>
+    </form>
+
+    {% if gst_amt is not None %}
+        <h2>Result:</h2>
+        {% if "Error" in gst_amt|stringformat:"s" %}
+            <p style="color: red;">{{ gst_amt }}</p>
+        {% else %}
+            <p>GST: {{ gst_amt|stringformat:".2f" }}</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
