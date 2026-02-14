@@ -1,29 +1,83 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
+  <head>
     <title>GST Calculator</title>
-</head>
-<body>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+      h1 {
+        color: #333;
+        text-align: center;
+      }
+      h2 {
+        color: #555;
+      }
+      form {
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      label {
+        display: block;
+        margin-top: 10px;
+        margin-bottom: 5px;
+        color: #333;
+        font-weight: bold;
+      }
+      input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      p {
+        margin-top: 10px;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
     <h1>GST Calculator</h1>
 
     <form method="post">
-        {% csrf_token %}
-        <label for="price">Price :</label>
-        <input type="text" id="price" name="price" required><br><br>
+      {% csrf_token %}
+      <label for="price">Price :</label>
+      <input type="text" id="price" name="price" required /><br /><br />
 
-        <label for="gst">GST (R in %):</label>
-        <input type="text" id="gst" name="gst" required><br><br>
+      <label for="gst">GST (R in %):</label>
+      <input type="text" id="gst" name="gst" required /><br /><br />
 
-        <button type="submit">Calculate</button>
+      <button type="submit">Calculate</button>
     </form>
 
     {% if gst_amt is not None %}
-        <h2>Result:</h2>
-        {% if "Error" in gst_amt|stringformat:"s" %}
-            <p style="color: red;">{{ gst_amt }}</p>
-        {% else %}
-            <p>GST: {{ gst_amt|stringformat:".2f" }}</p>
-        {% endif %}
-    {% endif %}
-</body>
+    <h2>Result:</h2>
+    {% if "Error" in gst_amt|stringformat:"s" %}
+    <p style="color: red">{{ gst_amt }}</p>
+    {% else %}
+    <p>GST: {{ gst_amt|stringformat:".2f" }}</p>
+    {% endif %} {% endif %}
+  </body>
 </html>
